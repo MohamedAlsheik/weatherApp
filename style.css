@@ -90,22 +90,27 @@ body{
     margin-top: 10px;
     display: none;
 }
-.card.clear {
+.card.clear-sky {
     background: linear-gradient(135deg, #87CEFA, #00BFFF);
 }
-
-.card.clouds {
-    background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+.card.few-clouds {
+    background: linear-gradient(135deg, #87CEEB, #d3d3d3);
 }
-
+.card.scattered-clouds {
+    background: linear-gradient(135deg, #b0c4de, #87cefa);
+}
+.card.broken-clouds {
+    background: linear-gradient(135deg, #a9a9a9, #778899);
+}
+.card.overcast-clouds {
+    background: linear-gradient(135deg, #808080, #4f4f4f);
+}
 .card.rain {
     background: linear-gradient(135deg, #5f9ea0, #2f4f4f);
 }
-
 .card.drizzle {
     background: linear-gradient(135deg, #aec6cf, #b0c4de);
 }
-
 .card.mist {
     background: linear-gradient(135deg, #cfcfcf, #bdbdbd);
 }

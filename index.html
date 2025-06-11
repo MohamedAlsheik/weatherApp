@@ -82,16 +82,16 @@ else if(data.weather[0].main == "Snow"){
 
 const card = document.querySelector(".card");
 
-card.classList.remove("clear", "clouds", "rain", "drizzle", "mist", "snow");
+card.className = "card";
+const weatherDesc = data.weather[0].description.toLowerCase().replace(/\s/g, "-");
+card.classList.add(weatherDesc);
 
-const weatherMain = data.weather[0].main.toLowerCase();
-card.classList.add(weatherMain);
 
 document.querySelector(".weather").style.display = "block";
 document.querySelector(".error").style.display = "none";
     }
 
-    
+    console.log(data);
 
 }
 
