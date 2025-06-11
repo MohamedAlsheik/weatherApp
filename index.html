@@ -40,7 +40,7 @@
 
 <script>
 
-const apiKey = "Your API-Key";
+const apiKey = "YOUR API-KEY";
 const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
 const searchBox = document.querySelector(".search input");
@@ -76,12 +76,22 @@ else if(data.weather[0].main == "Drizzle"){
 else if(data.weather[0].main == "Mist"){
     weatherIcon.src = "images/mist.png";
 }
+else if(data.weather[0].main == "Snow"){
+    weatherIcon.src = "images/snow.png";
+}
+
+const card = document.querySelector(".card");
+
+card.classList.remove("clear", "clouds", "rain", "drizzle", "mist", "snow");
+
+const weatherMain = data.weather[0].main.toLowerCase();
+card.classList.add(weatherMain);
 
 document.querySelector(".weather").style.display = "block";
 document.querySelector(".error").style.display = "none";
     }
 
-
+    
 
 }
 

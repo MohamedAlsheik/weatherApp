@@ -90,3 +90,26 @@ body{
     margin-top: 10px;
     display: none;
 }
+.card.clear {
+    background: linear-gradient(135deg, #87CEFA, #00BFFF);
+}
+
+.card.clouds {
+    background: linear-gradient(135deg, #d3d3d3, #a9a9a9);
+}
+
+.card.rain {
+    background: linear-gradient(135deg, #5f9ea0, #2f4f4f);
+}
+
+.card.drizzle {
+    background: linear-gradient(135deg, #aec6cf, #b0c4de);
+}
+
+.card.mist {
+    background: linear-gradient(135deg, #cfcfcf, #bdbdbd);
+}
+.card.snow {
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+}
+
