@@ -92,12 +92,24 @@ body{
 }
 .card.clear-sky {
     background: linear-gradient(135deg, #87CEFA, #00BFFF);
+    background-size: cover;
+    background-image: url('images/Clear-sky-sun.jpg');
+    background-position: 50% center;
+    background-repeat: no-repeat;
+    background-blend-mode: overlay;
 }
 .card.few-clouds {
     background: linear-gradient(135deg, #87CEEB, #d3d3d3);
+    background-size: cover;
+    background-position: 50% center;
+    background-image: url('images/Sun&clouds.jpg');
+    background-blend-mode: #ffffff;
 }
 .card.scattered-clouds {
     background: linear-gradient(135deg, #b0c4de, #87cefa);
+    background-size: cover;
+    background-image: url('images/scattered-clouds.jpg');
+    background-blend-mode: #ffffff;
 }
 .card.broken-clouds {
     background: linear-gradient(135deg, #a9a9a9, #778899);
