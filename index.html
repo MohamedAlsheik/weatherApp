@@ -50,54 +50,93 @@ const weatherIcon = document.querySelector(".weather-icon");
 async function checkWeather(city) {
     const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
 
-    if(response.status == 404){
+    if (response.status == 404) {
         document.querySelector(".error").style.display = "block";
         document.querySelector(".weather").style.display = "none";
-    }else{
-        var data = await response.json();
+    } else {
+        const data = await response.json();
 
-document.querySelector(".city").innerHTML = data.name;
-document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
-document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
-document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+        document.querySelector(".city").innerHTML = data.name;
+        document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°c";
+        document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+        document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-if(data.weather[0].main == "Clouds"){
-    weatherIcon.src = "images/clouds.png";
-}
-else if(data.weather[0].main == "Clear"){
-    weatherIcon.src = "images/clear.png";
-}
-else if(data.weather[0].main == "Rain"){
-    weatherIcon.src = "images/rain.png";
-}
-else if(data.weather[0].main == "Drizzle"){
-    weatherIcon.src = "images/drizzle.png";
-}
-else if(data.weather[0].main == "Mist"){
-    weatherIcon.src = "images/mist.png";
-}
-else if(data.weather[0].main == "Snow"){
-    weatherIcon.src = "images/snow.png";
-}
+        const weatherMain = data.weather[0].main;
+        if (weatherMain === "Clouds") {
+            weatherIcon.src = "images/clouds.png";
+        } else if (weatherMain === "Clear") {
+            weatherIcon.src = "images/clear.png";
+        } else if (weatherMain === "Rain") {
+            weatherIcon.src = "images/rain.png";
+        } else if (weatherMain === "Drizzle") {
+            weatherIcon.src = "images/drizzle.png";
+        } else if (weatherMain === "Mist") {
+            weatherIcon.src = "images/mist.png";
+        } else if (weatherMain === "Snow") {
+            weatherIcon.src = "images/snow.png";
+        }
 
-const card = document.querySelector(".card");
+        const description = data.weather[0].description.toLowerCase();
 
-card.className = "card";
-const weatherDesc = data.weather[0].description.toLowerCase().replace(/\s/g, "-");
-card.classList.add(weatherDesc);
+        const timezoneOffset = data.timezone;
 
+        const currentTime = data.dt + timezoneOffset;
+        const sunsetTime = data.sys.sunset + timezoneOffset;
+        const sunriseTime = data.sys.sunrise + timezoneOffset;
 
-document.querySelector(".weather").style.display = "block";
-document.querySelector(".error").style.display = "none";
+        const weatherMap = {
+            "clear sky": "clear-sky",
+            "few clouds": "few-clouds",
+            "scattered clouds": "scattered-clouds",
+            "broken clouds": "broken-clouds",
+            "overcast clouds": "overcast-clouds",
+            "light rain": "rain",
+            "moderate rain": "rain",
+            "heavy intensity rain": "rain",
+            "very heavy rain": "rain",
+            "drizzle": "drizzle",
+            "light snow": "snow",
+            "snow": "snow",
+            "mist": "mist",
+            "haze": "mist",
+            "smoke": "mist",
+            "fog": "mist",
+            "thunderstorm": "rain"
+        };
+
+        let weatherClass = weatherMap[description] || "default";
+
+        if (currentTime >= sunriseTime && currentTime <= (sunriseTime + 3600)) {
+            weatherClass = "sunrise";
+        }
+
+        else if (currentTime > sunsetTime && currentTime <= (sunsetTime + 3600) &&
+                 (weatherClass === "clear-sky" || weatherClass === "few-clouds")) {
+            weatherClass = "sunset";
+        }
+
+        else if (currentTime < sunriseTime || currentTime > (sunsetTime + 3600)) {
+            weatherClass = "night";
+        }
+
+        const card = document.querySelector(".card");
+        card.className = "card";
+        card.classList.add(weatherClass);
+
+        document.querySelector(".weather").style.display = "block";
+        document.querySelector(".error").style.display = "none";
+
     }
-
-    console.log(data);
-
 }
-
 
 searchBtn.addEventListener("click", ()=>{
     checkWeather(searchBox.value);
+})
+
+searchBox.addEventListener("keydown", (event) => {
+    if(event.key === "Enter"){
+        checkWeather(searchBox.value);
+    }
 })
 
 
